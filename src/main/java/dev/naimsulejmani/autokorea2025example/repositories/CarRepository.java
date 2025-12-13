@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
     //metodat tjera perkatese
     Optional<CarEntity> findByVin(String vin);
+
 }
