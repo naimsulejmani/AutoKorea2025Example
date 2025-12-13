@@ -1,4 +1,10 @@
 package dev.naimsulejmani.autokorea2025example.mappers;
 
-public interface BaseMapper {
+import java.util.List;
+
+public interface BaseMapper<D,E> {
+    E toEntity(D dto);
+    D toDto(E entity);
+    List<E> toEntityList(List<D> dtos);
+    List<D> toDtoList(List<E> entities);
 }
