@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{shared/_layout::layout('Register New Car',~{::div#palidhje}, null, null)}">
+
+<div id="palidhje">
+
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/cars">Cars</a></li>
+        <li class="breadcrumb-item active">New Car</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+      <p>Welcome to home page!</p>
+    </div>
+    <div class="container bg-white">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Register a new car</h5>
+
+              <!-- General Form Elements -->
+              <form method="post" th:action="@{/cars/new}" th:object="${carDto}">
+                <input type="hidden" name="username" th:value="admin"/>
+                <div class="row mb-3">
+                  <label for="vin" class="col-sm-2 col-form-label">Vin</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{vin}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="producedYear" class="col-sm-2 col-form-label">Year</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{producedYear}" min="2010" max="2025">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="model" class="col-sm-2 col-form-label">Model</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{model}" required minlength="2" maxlength="100">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="brand" class="col-sm-2 col-form-label">Brand</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{brand}">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="color" class="col-sm-2 col-form-label">Color</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{color}">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="doorseats" class="col-sm-2 col-form-label">Doors & Seats</label>
+                  <div class="col-sm-5">
+                    <input type="number" class="form-control" th:field="*{doors}" placeholder="Doors No" min="1">
+                  </div>
+                  <div class="col-sm-5">
+                    <input type="number" class="form-control" th:field="*{seats}" placeholder="Seats No" min="1">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="price" class="col-sm-2 col-form-label">Price</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{price}" min="0" max="10000000">
+                  </div>
+                </div>
+
+
+                <div class="row mb-3">
+                  <label for="transmissionType" class="col-sm-2 col-form-label">Transmission Type</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" th:field="*{transmissionType}">
+                      <option th:each="tranTypes:${transmissionTypes}" th:text="${tranTypes}" th:value="${tranTypes}"></option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="fuelType" class="col-sm-2 col-form-label">Fuel Type</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" th:field="*{fuelType}">
+                      <option th:each="ftype:${fuelTypes}" th:text="${ftype}" th:value="${ftype}"></option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="mileage" class="col-sm-2 col-form-label">Mileage</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{mileage}" min="0">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="horsePower" class="col-sm-2 col-form-label">Horse Power</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{horsePower}" min="0">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="cubicCapacity" class="col-sm-2 col-form-label">CC.</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{cubicCapacity}" min="0">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+                  <div class="col-sm-10">
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
+                  <div class="col-sm-10">
+                    <input type="time" class="form-control">
+                  </div>
+                </div>
+
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                  </div>x
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- End #main -->
+
+
+</html>

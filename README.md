@@ -8,4 +8,10 @@
 * repositories -> krijoni repositoryt per tabelat qe ju nevoiten zbashku me metodat perkatese
 * services -> krijoni service qe i pranojme kerkesat prej controllerit edhe i marrim te dhanat i mappojm edhe i derogjm ne repository edhe viceverace
 * controllers -> krijoni controllerat i pranojme kerkesat edhe i validojme DTO-te
+  * GET endpointat -> per PAGE (GET REPORTS)
+  * POST endpointat -> per FORM (CREATE, UPDATE, DELETE)
 * templates -> krijoni templates qe i pranojme prej front-end dhe i dergojmene front-end
+  * krijohen per cdo controller nje folder i veqante ku html-at apo faqet e qatij kontorlleri gjinden aty
+  * krijohen formularat per CRUD -> dhe LIST
+* shared -> krijoni shared templates qe i pranojme prej front-end dhe i dergojmene front-end
+* static -> krijoni static files qe i pranojme prej front-end dhe i dergojmene front-end

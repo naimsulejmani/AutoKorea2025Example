@@ -1,11 +1,20 @@
 package dev.naimsulejmani.autokorea2025example.controllers;
 
+import dev.naimsulejmani.autokorea2025example.dtos.CarDto;
+import dev.naimsulejmani.autokorea2025example.enums.FuelType;
+import dev.naimsulejmani.autokorea2025example.enums.TransmissionType;
 import dev.naimsulejmani.autokorea2025example.services.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/cars")
@@ -18,6 +27,23 @@ public class CarControllers {
 
         model.addAttribute("cars", carService.findAll());
         return "cars/list";
+    }
+
+    @GetMapping("/new")
+    public String getNewCarPage(Model model) {
+        model.addAttribute("carDto", new CarDto());
+        model.addAttribute("transmissionTypes", TransmissionType.values());
+        model.addAttribute("fuelTypes", FuelType.values());
+        return "cars/new";
+    }
+
+    @PostMapping("/new")
+    public String createNewCar(@Valid @ModelAttribute CarDto carDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "cars/new";
+        }
+        carService.add(carDto);
+        return "redirect:/cars";
     }
 
 }
