@@ -64,7 +64,5 @@ public class CarDto {
     @NotNull
     private FuelType fuelType;
 
-
-//    @NotNull
     private String username;
 }
