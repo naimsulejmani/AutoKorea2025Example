@@ -43,6 +43,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDto> findAll() {
+
         return mapper.toDtoList(repository.findAll());
     }
 

@@ -17,4 +17,14 @@ public class HomeController {
     public String test() {
         return "test";
     }
+
+    @GetMapping("/404")
+    public String notFound() {
+        return "shared/404";
+    }
+
+    @GetMapping("/500")
+    public String serverError() {
+        return "shared/500";
+    }
 }

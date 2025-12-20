@@ -27,9 +27,38 @@
                th:class="${action == null} ? 'btn btn-outline-danger' : 'btn btn-danger'"
                th:if="${action == null}">Delete</a>
 
-            <form th:action="${action}" method="post" th:unless="${action == null}" style="display: inline-block;">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+<!--            <form th:action="${action}" method="post" th:unless="${action == null}" style="display: inline-block;">-->
+<!--                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this car?')">Delete</button>-->
+<!--            </form>-->
+
+            <th:inline th:unless="${action == null}">
+                <!-- Basic Modal -->
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    Delete
+                </button>
+                <div class="modal fade" id="basicModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Basic Modal</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                               Are you sure you want to delete this car with id <th:block th:text="${carDto.id}"></th:block>
+                                because it's irreversible action?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <form th:action="${action}" method="post" th:unless="${action == null}" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- End Basic Modal-->
+            </th:inline>
+
+
 
         </div>
     </div>
