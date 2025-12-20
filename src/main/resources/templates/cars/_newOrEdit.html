@@ -3,6 +3,11 @@
 
 <!-- General Form Elements -->
 <form method="post" th:action="${action}" th:object="${carDto}">
+  <input type="hidden" name="id" th:value="*{id}"/>
+  <div>
+    <span class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+  </div>
+
   <input type="hidden" name="username" th:value="admin"/>
   <div class="row mb-3">
     <label for="vin" class="col-sm-2 col-form-label">Vin</label>

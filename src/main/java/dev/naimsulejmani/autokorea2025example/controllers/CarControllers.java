@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -49,4 +50,35 @@ public class CarControllers {
         return "cars/view";
     }
 
+    @GetMapping("/{id}/edit")
+    public String getCarEditPage(Model model, @PathVariable Long id) {
+        model.addAttribute("carDto", carService.findOne(id));
+        model.addAttribute("transmissionTypes", TransmissionType.values());
+        model.addAttribute("fuelTypes", FuelType.values());
+
+        return "cars/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String postCarEdit(@PathVariable long id, @Valid @ModelAttribute CarDto carDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+
+            return "cars/edit";
+        }
+        if (carDto.getId() != id) {
+            carDto.setId(id);
+            bindingResult.rejectValue("id", "carDto.id", "Id doesn't match");
+            return "cars/edit";
+        }
+
+        carService.modify(id, carDto);
+        return "redirect:/cars";
+    }
+
 }
+
+
+
+
+
+

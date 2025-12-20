@@ -26,7 +26,7 @@
             <div class="card-body">
               <h5 class="card-title">Edit car</h5>
 
-
+              <th:block th:replace="~{cars/_newOrEdit::newOrEditForm(@{/cars/{id}/edit(id=${carDto.id})}, ${carDto})}"></th:block>
 
             </div>
           </div>
