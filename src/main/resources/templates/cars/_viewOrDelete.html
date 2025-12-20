@@ -1,0 +1,36 @@
+<th:block th:fragment="viewOrDeleteForm(carDto, action)">
+    <div class="card" th:object="${carDto}">
+        <div class="card-body">
+            <h5 class="card-title">View car</h5>
+            <hr>
+
+            <th:block th:replace="~{shared/_helper::rowHtml('Id', *{id})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Vin', *{vin})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Brand', *{brand})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Model', *{model})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Produced Year', *{producedYear})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Mileage', *{mileage})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Doors', *{doors})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Seats', *{seats})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Color', *{color})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Price', *{price})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Transmission Type', *{transmissionType})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Fuel Type', *{fuelType})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Horse Power', *{horsePower})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Cubic Capacity', *{cubicCapacity})}"></th:block>
+
+            <hr/>
+            <a href="/cars" class="btn btn-primary">Back to Cars</a>
+            <a th:href="@{/cars/{id}/edit(id=${carDto.id})}" class="btn btn-warning">Edit</a>
+
+            <a th:href="@{/cars/{id}/delete(id=${carDto.id})}"
+               th:class="${action == null} ? 'btn btn-outline-danger' : 'btn btn-danger'"
+               th:if="${action == null}">Delete</a>
+
+            <form th:action="${action}" method="post" th:unless="${action == null}" style="display: inline-block;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+
+        </div>
+    </div>
+</th:block>

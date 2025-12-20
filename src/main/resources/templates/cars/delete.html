@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{shared/_layout::layout('View Car',~{::div#palidhje}, null, null)}">
+<html lang="en" th:replace="~{shared/_layout::layout('Delete Car',~{::div#palidhje}, null, null)}">
 
 <div id="palidhje">
 
@@ -9,20 +9,20 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/cars">Cars</a></li>
-                <li class="breadcrumb-item active">View Car</li>
+                <li class="breadcrumb-item active">Delete Car</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
         <div class="row">
-            <p>Welcome to view car page!</p>
+            <p>Welcome to delete car page!</p>
         </div>
         <div class="container" th:object="${carDto}">
             <div class="row">
                 <div class="col-lg-6">
 
-                  <th:block th:replace="~{cars/_viewOrDelete::viewOrDeleteForm(${carDto},null)}"></th:block>
+                    <th:block th:replace="~{cars/_viewOrDelete::viewOrDeleteForm(${carDto},@{/cars/{id}/delete(id=${carDto.id})})}"></th:block>
 
                 </div>
             </div>

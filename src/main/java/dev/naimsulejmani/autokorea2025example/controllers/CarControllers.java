@@ -3,6 +3,7 @@ package dev.naimsulejmani.autokorea2025example.controllers;
 import dev.naimsulejmani.autokorea2025example.dtos.CarDto;
 import dev.naimsulejmani.autokorea2025example.enums.FuelType;
 import dev.naimsulejmani.autokorea2025example.enums.TransmissionType;
+import dev.naimsulejmani.autokorea2025example.exceptions.CarNotFoundException;
 import dev.naimsulejmani.autokorea2025example.services.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 
@@ -36,8 +38,11 @@ public class CarControllers {
     }
 
     @PostMapping("/new")
-    public String createNewCar(@Valid @ModelAttribute CarDto carDto, BindingResult bindingResult) {
+    public String createNewCar(@Valid @ModelAttribute CarDto carDto, BindingResult bindingResult,
+                               Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("transmissionTypes", TransmissionType.values());
+            model.addAttribute("fuelTypes", FuelType.values());
             return "cars/new";
         }
         carService.add(carDto);
@@ -60,18 +65,37 @@ public class CarControllers {
     }
 
     @PostMapping("/{id}/edit")
-    public String postCarEdit(@PathVariable long id, @Valid @ModelAttribute CarDto carDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-
-            return "cars/edit";
-        }
+    public String postCarEdit(@PathVariable long id, @Valid @ModelAttribute CarDto carDto,
+                              BindingResult bindingResult, Model model) {
         if (carDto.getId() != id) {
             carDto.setId(id);
             bindingResult.rejectValue("id", "carDto.id", "Id doesn't match");
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("transmissionTypes", TransmissionType.values());
+            model.addAttribute("fuelTypes", FuelType.values());
             return "cars/edit";
         }
 
         carService.modify(id, carDto);
+        return "redirect:/cars";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String getCarDeletePage(@PathVariable long id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            model.addAttribute("carDto", carService.findOne(id));
+            return "cars/delete";
+        } catch (CarNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("error",
+                    String.format("Car not found for id: %d", id));
+            return "redirect:/cars";
+        }
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteCar(@PathVariable long id) {
+        carService.remove(id);
         return "redirect:/cars";
     }
 
