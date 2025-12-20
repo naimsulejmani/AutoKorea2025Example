@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{shared/_layout::layout('View Car',~{::div#palidhje}, null, null)}">
+
+<div id="palidhje">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/cars">Cars</a></li>
+                <li class="breadcrumb-item active">View Car</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <p>Welcome to view car page!</p>
+        </div>
+        <div class="container" th:object="${carDto}">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">View car</h5>
+                            <hr>
+
+                            <th:block th:replace="~{shared/_helper::rowHtml('Id', *{id})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Vin', *{vin})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Brand', *{brand})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Model', *{model})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Produced Year', *{producedYear})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Mileage', *{mileage})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Doors', *{doors})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Seats', *{seats})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Color', *{color})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Price', *{price})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Transmission Type', *{transmissionType})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Fuel Type', *{fuelType})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Horse Power', *{horsePower})}"></th:block>
+                            <th:block th:replace="~{shared/_helper::rowHtml('Cubic Capacity', *{cubicCapacity})}"></th:block>
+
+                            <hr/>
+                            <a href="/cars" class="btn btn-primary">Back to Cars</a>
+                            <a th:href="@{/cars/{id}/edit(id=${carDto.id})}" class="btn btn-warning">Edit</a>
+                            <a th:href="@{/cars/{id}/delete(id=${carDto.id})}" class="btn btn-danger">Delete</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div><!-- End #main -->
+
+
+</html>
