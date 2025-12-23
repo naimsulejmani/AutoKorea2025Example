@@ -29,6 +29,8 @@ public class CarDto {
     @Positive(message = "Brand ID must be positive")
     private Long brandId;
 
+    private BrandDto brand;
+
     @Size(min = 2, max = 100, message = "Color must be between 2 and 100 characters long")
     private String color;
 

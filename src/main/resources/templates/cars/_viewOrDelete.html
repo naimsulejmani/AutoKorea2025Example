@@ -6,7 +6,7 @@
 
             <th:block th:replace="~{shared/_helper::rowHtml('Id', *{id})}"></th:block>
             <th:block th:replace="~{shared/_helper::rowHtml('Vin', *{vin})}"></th:block>
-            <th:block th:replace="~{shared/_helper::rowHtml('Brand', *{brand})}"></th:block>
+            <th:block th:replace="~{shared/_helper::rowHtml('Brand', *{brand.name})}"></th:block>
             <th:block th:replace="~{shared/_helper::rowHtml('Model', *{model})}"></th:block>
             <th:block th:replace="~{shared/_helper::rowHtml('Produced Year', *{producedYear})}"></th:block>
             <th:block th:replace="~{shared/_helper::rowHtml('Mileage', *{mileage})}"></th:block>

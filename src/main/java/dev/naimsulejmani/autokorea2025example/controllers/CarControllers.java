@@ -4,23 +4,22 @@ import dev.naimsulejmani.autokorea2025example.dtos.CarDto;
 import dev.naimsulejmani.autokorea2025example.enums.FuelType;
 import dev.naimsulejmani.autokorea2025example.enums.TransmissionType;
 import dev.naimsulejmani.autokorea2025example.exceptions.CarNotFoundException;
+import dev.naimsulejmani.autokorea2025example.services.BrandService;
 import dev.naimsulejmani.autokorea2025example.services.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Arrays;
 
 @Controller
 @RequestMapping("/cars")
 @RequiredArgsConstructor
 public class CarControllers {
     private final CarService carService;
+    private final BrandService brandService;
 
     @GetMapping
     public String getCarsPage(Model model) {
@@ -29,11 +28,16 @@ public class CarControllers {
         return "cars/list";
     }
 
+    public void addCommonAttributes(Model model) {
+        model.addAttribute("transmissionTypes", TransmissionType.values());
+        model.addAttribute("fuelTypes", FuelType.values());
+        model.addAttribute("brands", brandService.findAll());
+    }
+
     @GetMapping("/new")
     public String getNewCarPage(Model model) {
         model.addAttribute("carDto", new CarDto());
-        model.addAttribute("transmissionTypes", TransmissionType.values());
-        model.addAttribute("fuelTypes", FuelType.values());
+        addCommonAttributes(model);
         return "cars/new";
     }
 
@@ -41,8 +45,7 @@ public class CarControllers {
     public String createNewCar(@Valid @ModelAttribute CarDto carDto, BindingResult bindingResult,
                                Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("transmissionTypes", TransmissionType.values());
-            model.addAttribute("fuelTypes", FuelType.values());
+            addCommonAttributes(model);
             return "cars/new";
         }
         carService.add(carDto);
@@ -58,8 +61,7 @@ public class CarControllers {
     @GetMapping("/{id}/edit")
     public String getCarEditPage(Model model, @PathVariable Long id) {
         model.addAttribute("carDto", carService.findOne(id));
-        model.addAttribute("transmissionTypes", TransmissionType.values());
-        model.addAttribute("fuelTypes", FuelType.values());
+        addCommonAttributes(model);
 
         return "cars/edit";
     }
@@ -72,8 +74,7 @@ public class CarControllers {
             bindingResult.rejectValue("id", "carDto.id", "Id doesn't match");
         }
         if (bindingResult.hasErrors()) {
-            model.addAttribute("transmissionTypes", TransmissionType.values());
-            model.addAttribute("fuelTypes", FuelType.values());
+            addCommonAttributes(model);
             return "cars/edit";
         }
 
@@ -89,7 +90,7 @@ public class CarControllers {
         } catch (CarNotFoundException ex) {
             redirectAttributes.addFlashAttribute("error",
                     String.format("Car not found for id: %d", id));
-            redirectAttributes.addAttribute("errorId", "ERR001");
+            redirectAttributes.addAttribute("errorId", "ERR001"); // URL query param
             return "redirect:/cars";
         }
     }
