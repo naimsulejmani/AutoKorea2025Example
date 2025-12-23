@@ -15,3 +15,11 @@
   * krijohen formularat per CRUD -> dhe LIST
 * shared -> krijoni shared templates qe i pranojme prej front-end dhe i dergojmene front-end
 * static -> krijoni static files qe i pranojme prej front-end dhe i dergojmene front-end
+
+Menaxhimi i gabimeve:
+1. Redirect Attribute -> ku kemi mujt me i dergu prej nje URL ne nje URL nje model apo te dhene
+   * AddFlashAttribute -> permes i dergojme te dhene apo model prej nje URL ne nje URL
+   * AddAttribute -> permes i dergojme te dhene apo model prej nje URL ne nje URL
+2. @ControllerAdvice -> permes i menaxhmojme gabime apo exceptione
+   * @ExceptionHandler -> permes i menaxhmojme gabime apo exceptione
+   * @InitBinder -> permes i menaxhmojme gabime apo exceptione

@@ -89,6 +89,7 @@ public class CarControllers {
         } catch (CarNotFoundException ex) {
             redirectAttributes.addFlashAttribute("error",
                     String.format("Car not found for id: %d", id));
+            redirectAttributes.addAttribute("errorId", "ERR001");
             return "redirect:/cars";
         }
     }
