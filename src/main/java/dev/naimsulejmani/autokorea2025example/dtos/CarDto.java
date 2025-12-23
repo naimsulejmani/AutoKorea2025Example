@@ -26,8 +26,8 @@ public class CarDto {
     @Size(min = 2, max = 100, message = "Model must be between 2 and 100 characters long")
     private String model;
 
-    @Size(min = 2, max = 100, message = "Brand must be between 2 and 100 characters long")
-    private String brand;
+    @Positive(message = "Brand ID must be positive")
+    private Long brandId;
 
     @Size(min = 2, max = 100, message = "Color must be between 2 and 100 characters long")
     private String color;

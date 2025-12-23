@@ -33,8 +33,12 @@ public class CarEntity {
     @Column(nullable = false, length = 100)
     private String model;
 
-    @Column(nullable = false, length = 100)
-    private String brand;
+//    @Column(nullable = false, length = 100)
+//    private String brand;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id", nullable = false)
+    private BrandEntity brand;
 
     @Column(nullable = false, length = 100)
     private String color;
@@ -59,7 +63,7 @@ public class CarEntity {
     private boolean archived;
 
     @Column(nullable = false, precision = 15)
-    private float mileage=0;
+        private float mileage=0;
 
     private int horsePower;
 

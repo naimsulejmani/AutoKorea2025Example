@@ -10,6 +10,11 @@ public interface CarMapper extends BaseMapper<CarDto, CarEntity> {
 
     @Mapping(target = "createdBy", source = "username")
     @Mapping(target = "updatedBy", source = "username")
+    @Mapping(target = "brand.id", source = "brandId")
     @Override
     CarEntity toEntity(CarDto dto);
+
+    @Override
+    @Mapping(target = "brandId", source = "brand.id")
+    CarDto toDto(CarEntity entity);
 }
