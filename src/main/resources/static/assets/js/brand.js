@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     await loadBrands();
 
     document.querySelector("#brandTableBody").addEventListener("click", async function (event) {
-        if (event.target.tagName == "BUTTON" && event.target.innerHTMML == "Delete") {
+        console.log(event.target)
+        if (event.target.tagName == "BUTTON" && event.target.textContent == "Delete") {
             await deleteBrand(event.target.dataset.id);
         }
     })
