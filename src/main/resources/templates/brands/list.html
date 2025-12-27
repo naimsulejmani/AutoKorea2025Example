@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{shared/_layout::layout('List of Brands',~{::div#palidhje}, null, ~{::script})}">
+
+<div id="palidhje">
+
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active">Brands</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section dashboard">
+    <div class="col m-2">
+      <button class="btn btn-primary">
+        <i class="bi bi-plus"></i>
+        New Car</button>
+    </div>
+    <div class="container bg-white">
+
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-md">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Logo</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="brandTableBody">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+</div>
+
+<script th:src="@{/assets/js/brand.js}"></script>
+
+</html>
