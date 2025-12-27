@@ -1,6 +1,7 @@
 package dev.naimsulejmani.autokorea2025example.controllers.advices;
 
 import dev.naimsulejmani.autokorea2025example.exceptions.NotFoundException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -10,7 +11,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@ControllerAdvice
+@ControllerAdvice(basePackages = "dev.naimsulejmani.autokorea2025example.controllers", annotations = Controller.class)
 public class AdviceController {
 
     private final Logger logger = Logger.getLogger(AdviceController.class.getName());
