@@ -4,27 +4,52 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "features")
-public class FeatureEntity {
+@Entity(name = "car_features")
+public class CarFeatureEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50, nullable = false, unique = true)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "car_id", nullable = false)
+    private CarEntity car;
+
+    @ManyToOne
+    @JoinColumn(name = "feature_id", nullable = false)
+    private FeatureEntity feature;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "featureEntity")
-    private Set<CarFeatureEntity> carFeatures;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

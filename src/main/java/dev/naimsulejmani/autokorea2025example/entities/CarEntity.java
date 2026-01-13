@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 @Entity(name = "cars")
@@ -114,6 +115,9 @@ public class CarEntity {
 
     //@PostPersist
     //@PostRemove
+
+    @OneToMany(mappedBy = "carEntity")
+    private Set<CarFeatureEntity> carFeatures;
 }
 
 
