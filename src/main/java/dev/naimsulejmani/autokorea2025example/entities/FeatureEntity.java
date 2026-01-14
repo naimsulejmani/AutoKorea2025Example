@@ -22,7 +22,7 @@ public class FeatureEntity {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "featureEntity")
+    @OneToMany(mappedBy = "feature")
     private Set<CarFeatureEntity> carFeatures;
 }
 

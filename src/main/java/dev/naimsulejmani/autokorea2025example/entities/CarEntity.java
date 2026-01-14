@@ -116,7 +116,7 @@ public class CarEntity {
     //@PostPersist
     //@PostRemove
 
-    @OneToMany(mappedBy = "carEntity")
+    @OneToMany(mappedBy = "car")
     private Set<CarFeatureEntity> carFeatures;
 }
 

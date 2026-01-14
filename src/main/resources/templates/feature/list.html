@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{shared/_layout::layout('Feature management',~{::div#palidhje}, null, ~{::script})}">
+
+<div id="palidhje">
+
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Cars</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section dashboard">
+
+    </section>
+
+</div>
+
+<script th:src="@{/assets/js/feature/api.js}"></script>
+<script th:src="@{/assets/js/feature/app.js}"></script>
+
+</html>
