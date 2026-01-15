@@ -34,6 +34,6 @@ class FeatureApi {
 
     delete(id) {
         return fetch(`${this.url}/${id}`, {method: 'DELETE'})
-            .then(response => response.json());
+            .then(response => response.text());
     }
 }

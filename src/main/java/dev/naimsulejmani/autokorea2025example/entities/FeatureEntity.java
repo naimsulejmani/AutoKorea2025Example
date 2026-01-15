@@ -20,6 +20,7 @@ public class FeatureEntity {
     @Column(length = 50, nullable = false, unique = true)
     private String name;
 
+//    @Column(nullable = false, columnDefinition = "NOW()")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "feature")

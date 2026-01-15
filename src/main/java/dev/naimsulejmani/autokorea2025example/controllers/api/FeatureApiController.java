@@ -6,6 +6,7 @@ import jakarta.servlet.ServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,7 @@ public class FeatureApiController {
 
     @PostMapping
     public FeatureDto add(@RequestBody FeatureDto featureDto) {
+        featureDto.setCreatedAt(LocalDateTime.now());
         return service.add(featureDto);
     }
 
